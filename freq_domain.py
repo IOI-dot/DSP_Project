@@ -39,7 +39,7 @@ def freq_domain(EEG: dict, n: float = 0.5) -> tuple:
                 freqs, psd = welch(window, fs=fs, nperseg=nperseg)
                 feats = []
                 for low, high in bands.values():
-                    mask = (freqs >= low) & (freqs <= high)
+                    mask = (freqs >= low) & (freqs < high)
                     feats.append(trapezoid(psd[mask], freqs[mask]))
                 
                 row = (i * n_windows) + wind_idx
